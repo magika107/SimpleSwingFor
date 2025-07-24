@@ -9,40 +9,24 @@ public class Form extends JPanel {
     private JButton addButton, viewButton;
 
     public Form() {
+        setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
+
         JLabel nameLabel = new JLabel("Name:");
-        JLabel familyLabel = new JLabel("Family:");
+        add(nameLabel);
         nameField = new JTextField(15);
+        add(nameField);
+
+        JLabel familyLabel = new JLabel("Family:");
+        add(familyLabel);
         familyField = new JTextField(15);
+        add(familyField);
+
+
         addButton = new JButton("Add Person");
         viewButton = new JButton("View All Persons");
+        add(viewButton);
+        add(addButton);
 
-        setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.anchor = GridBagConstraints.WEST;
-
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        add(nameLabel, gbc);
-
-        gbc.gridx = 1;
-        add(nameField, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        add(familyLabel, gbc);
-
-        gbc.gridx = 1;
-        add(familyField, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        add(addButton, gbc);
-
-        gbc.gridy = 3;
-        add(viewButton, gbc);
     }
 
     public String getName() {
@@ -53,16 +37,15 @@ public class Form extends JPanel {
         return familyField.getText();
     }
 
-    public void submitPerson(ActionListener actionListener) {
+    public void setAddButtonListener(ActionListener actionListener) {
         addButton.addActionListener(actionListener);
     }
-
-    public void viewPerson(ActionListener actionListener) {
+    public void setViewButtonListener(ActionListener actionListener) {
         viewButton.addActionListener(actionListener);
     }
 
-    public void reset(boolean bln) {
-        if (bln) {
+    public void clearFormFields(boolean shouldClear) {
+if(shouldClear) {
             nameField.setText("");
             familyField.setText("");
         }

@@ -4,14 +4,14 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-public class PersonDetails extends JPanel {
+public class PersonTablePanel extends JPanel {
 
     private JTable personTable;
     private String[] personTableColumn = {"name", "family"};
     private DefaultTableModel tableModel;
     private JButton backButton;
 
-    public PersonDetails() {
+    public PersonTablePanel() {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         JToolBar toolBar = new JToolBar();
         backButton = new JButton("Back");

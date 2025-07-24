@@ -6,37 +6,32 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainForm extends JFrame {
-    private CardLayout cardLayout;
-    private JPanel mainPanel;
-    private PersonController controller;
-
     public MainForm() {
-        super("Java Swing MVC");
+        setTitle("Simple Person Form");
 
-        cardLayout = new CardLayout();
-        mainPanel = new JPanel(cardLayout);
+        CardLayout layout = new CardLayout();
+        JPanel panel = new JPanel(layout);
 
         Form form = new Form();
-        PersonDetails personDetails = new PersonDetails();
+        PersonTablePanel details = new PersonTablePanel();
 
-        controller = new PersonController(form, personDetails);
+        PersonController controller = new PersonController(form, details);
 
-        mainPanel.add(form, "form");
-        mainPanel.add(personDetails, "details");
+        panel.add(form, "form");
+        panel.add(details, "details");
 
         form.addViewButtonListener(e -> {
             controller.loadAndShowPersons();
-            cardLayout.show(mainPanel, "details");
+            layout.show(panel, "details");
         });
 
-        personDetails.getBackButton().addActionListener(e -> {
-            cardLayout.show(mainPanel, "form");
+        details.getBackButton().addActionListener(e -> {
+            layout.show(panel, "form");
         });
 
-        setContentPane(mainPanel);
-
-        setSize(800, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setContentPane(panel);
+        setSize(600, 400);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
     }

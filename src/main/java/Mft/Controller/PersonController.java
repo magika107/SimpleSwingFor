@@ -4,7 +4,7 @@ import Mft.Model.DataBase;
 import Mft.Model.Person;
 import Mft.View.Form;
 
-import Mft.View.PersonDetails;
+import Mft.View.PersonTablePanel;
 
 
 import javax.swing.*;
@@ -15,14 +15,14 @@ public class PersonController {
     private final String databaseFile = "src\\main\\java\\Mft\\Data\\database.txt";
     private final DataBase database;
     private final Form form;
-    private final PersonDetails personDetails;
+    private final PersonTablePanel personDetails;
 
-    public PersonController(Form form, PersonDetails personDetails) {
+    public PersonController(Form form, PersonTablePanel personDetails) {
         this.database = new DataBase();
         this.form = form;
         this.personDetails = personDetails;
 
-        this.form.submitPerson(e -> {
+        this.form.setAddButtonListener(e -> {
             String name = this.form.getName().trim();
             String family = this.form.getFamily().trim();
             System.out.println("Name: '" + name + "'");
@@ -35,7 +35,7 @@ public class PersonController {
 
             this.database.addPerson(new Person(name, family));
             this.database.savePerson(new File(databaseFile));
-            this.form.reset(true);
+            this.form.clearFormFields(true);
 
 
             JOptionPane.showMessageDialog(this.form, "Person added successfully!", "Info", JOptionPane.INFORMATION_MESSAGE);
@@ -52,5 +52,4 @@ public class PersonController {
         }
         this.personDetails.setPersonData(data);
     }
-
 }
