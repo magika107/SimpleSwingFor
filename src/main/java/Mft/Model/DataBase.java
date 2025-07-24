@@ -20,7 +20,11 @@ public class DataBase {
     }
 
     public void savePerson(File file) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, false))) { // overwrite mode
+        File parent = file.getParentFile();
+        if (!parent.exists()) {
+            parent.mkdirs();
+        }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, false))) {
             for (Person person : personList) {
                 String line = person.getName() + "," + person.getFamily();
                 writer.write(line);

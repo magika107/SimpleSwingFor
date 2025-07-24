@@ -9,7 +9,6 @@ public class Person {
     public Person() {
     }
 
-    ;
 
     public Person(String name, String family) {
         this.name = name;
